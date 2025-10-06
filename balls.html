@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2005 called bitch</title>
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('xp.jpg');
+            background-size: cover;      /* Scales image to cover entire background */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents tiling */
+            background-attachment: fixed; /* Keeps background fixed when scrolling */
+            font-family: "Tahoma", sans-serif;
+            overflow: hidden;
+            cursor: url('dscim.png'), auto;
+        }
+        
+        .desktop {
+            height: calc(100vh - 30px);
+            overflow-y: auto;
+            padding: 20px;
+            cursor: url('dscim.png'), auto;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            cursor: url('dscim.png'), auto;
+        }
+        
+        .window {
+            margin-bottom: 20px;
+            cursor: url('dscim.png'), auto;
+        }
+        
+        /* Custom XP Taskbar Styles */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #1941a5 100%);
+            border-top: 1px solid #0831d9;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            cursor: url('dscim.png'), auto;
+            z-index: 1000;
+        }
+        
+        .start-button {
+            height: 30px;
+            background: linear-gradient(to bottom, #5ecd5e 0%, #4cc14c 8%, #4cc14c 50%, #34a734 92%, #2d992d 100%);
+            border: 1px solid #188518;
+            border-radius: 0 8px 8px 0;
+            border-left: none;
+            padding: 0 20px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: url('dscim.png'), auto;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            font-size: 11px;
+            font-style: italic;
+            margin-right: 10px;
+        }
+        
+        .start-button:hover {
+            background: linear-gradient(to bottom, #6ee76e 0%, #5cd15c 8%, #5cd15c 50%, #44b744 92%, #3da73d 100%);
+        }
+        
+        .start-button:active {
+            background: linear-gradient(to bottom, #2d992d 0%, #34a734 50%, #4cc14c 92%, #5ecd5e 100%);
+        }
+        
+        .start-logo {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .task-buttons {
+            flex: 1;
+            display: flex;
+            gap: 4px;
+            padding: 0 5px;
+        }
+        
+        .task-button {
+            background: linear-gradient(to bottom, #3f8cf3 0%, #2573f0 50%, #1960e8 100%);
+            border: 1px solid #0831d9;
+            padding: 2px 8px;
+            color: white;
+            font-size: 11px;
+            cursor: url('dscim.png'), auto;
+            min-width: 120px;
+            max-width: 160px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        
+        .task-button:hover {
+            background: linear-gradient(to bottom, #5ea2ff 0%, #3c8cff 50%, #2178ff 100%);
+            cursor: url('dscim.png'), auto;
+        }
+        
+        .task-button.active {
+            background: linear-gradient(to bottom, #1854cc 0%, #1854cc 50%, #1854cc 100%);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+            cursor: url('dscim.png'), auto;
+        }
+        
+        .system-tray {
+            background: linear-gradient(to bottom, #0ea5ea 0%, #0ea5ea 4%, #1caae5 8%, #1caae5 50%, #1890cf 92%, #1890cf 96%, #127dc1 100%);
+            border-left: 2px solid #0d6cb4;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 8px;
+        }
+        
+        .tray-icon {
+            width: 16px;
+            height: 16px;
+            cursor: url('dscim.png'), auto;
+        }
+        
+        .clock {
+            color: white;
+            font-size: 11px;
+            padding: 0 5px;
+        }
+        
+        /* Desktop Icons */
+        .desktop-icon {
+            width: 70px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: url('dscim.png'), auto;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        
+        .desktop-icon img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 5px;
+        }
+        
+        .desktop-icon span {
+            display: block;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop">
+        <div class="container">
+            <!-- Main Window -->
+            <div class="window" style="width: 100%">
+                <div class="title-bar">
+                    <div class="title-bar-text">@@@@!1@!@!@@@@@@@@</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize"></button>
+                        <button aria-label="Maximize"></button>
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <p>there are some things</p>
+                    
+                    <!-- Tabs -->
+                    <section class="tabs">
+                        <menu role="tablist">
+                            <button role="tab" aria-selected="true" aria-controls="tab-general">pen0r</button>
+                            <button role="tab" aria-controls="tab-settings">just guess</button>
+                            <button role="tab" aria-controls="tab-about">habibi</button>
+                        </menu>
+                        
+                        <article role="tabpanel" id="tab-general">
+                            <h3>General Tab</h3>
+                            
+                            <fieldset>
+                                <legend>Options</legend>
+                                <div class="field-row">
+                                    <input checked type="checkbox" id="option1">
+                                    <label for="option1">Enable feature one</label>
+                                </div>
+                                <div class="field-row">
+                                    <input type="checkbox" id="option2">
+                                    <label for="option2">Enable feature two</label>
+                                </div>
+                            </fieldset>
+                            
+                            <div class="field-row" style="margin-top: 10px;">
+                                <label for="text-input">Text Input:</label>
+                                <input id="text-input" type="text" placeholder="Enter text here" />
+                            </div>
+                            
+                            <div class="field-row">
+                                <label for="select-input">Choose option:</label>
+                                <select id="select-input">
+                                    <option>penis</option>
+                                    <option>penis</option>
+                                    <option>penis</option>
+                                </select>
+                            </div>
+                        </article>
+                        
+                        <article role="tabpanel" hidden id="tab-settings">
+                            <h3>just guess</h3>
+                            <fieldset>
+                                <legend>Preferences</legend>
+                                <div class="field-row">
+                                    <input id="radio1" type="radio" name="pref" checked>
+                                    <label for="radio1">Preference A</label>
+                                </div>
+                                <div class="field-row">
+                                    <input id="radio2" type="radio" name="pref">
+                                    <label for="radio2">Preference B</label>
+                                </div>
+                                <div class="field-row">
+                                    <input id="radio3" type="radio" name="pref">
+                                    <label for="radio3">Preference C</label>
+                                </div>
+                            </fieldset>
+                            
+                            <h4 style="margin-top: 15px;"></h4>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/rWSgsbWiX_g?si=yJU3N-__Uxbac9-1"
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            referrerpolicy="strict-origin-when-cross-origin"; allowfullscreen></iframe>
+                            <p style="margin-top: 10px;">Progress:</p>
+                            <progress max="100" value="65"></progress>
+                        </article>
+                        
+                        <article role="tabpanel" hidden id="tab-about">
+                            <h3>there is no escape</h3>
+                            <p>i have no mouth and i must scream</p>
+                            
+                            <ul class="tree-view">
+                                <li>teh pwnage</li>
+                                <li>
+                                    <details>
+                                        <summary>links from me to you</summary>
+                                        <ul>
+                                            <li onclick="window.open('https://botoxparty.github.io/XP.css/', '_blank')">web styles here</li>
+                                            <li onclick="window.open('https://github.com/haaamms', '_blank')">my github</li>
+                                            <li onclick="window.open('https://www.discogs.com/user/dhammi1/collection', '_blank')">my discogs</li>
+                                        </ul>
+                                    </details>
+                                </li>
+                                <li>Version 1.0</li>
+                            </ul>
+                        </article>
+                    </section>
+                    
+                    <section class="field-row" style="justify-content: flex-end; margin-top: 15px;">
+                        <button>OK</button>
+                        <button>Cancel</button>
+                        <button>Apply</button>
+                    </section>
+                </div>
+                
+                <div class="status-bar">
+                    <p class="status-bar-field">Ready</p>
+                    <p class="status-bar-field">Status: Active</p>
+                </div>
+            </div>
+            
+            <!-- Secondary Window -->
+            <div class="window" style="width: 400px;">
+                <div class="title-bar">
+                    <div class="title-bar-text">Quick Actions</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <p>Click a button to perform an action:</p>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button onclick="window.open('https://fantasyinitiative.com/', '_blank')">cool shit</button>
+                        <button>This also does nothing</button>
+                        <button>This does nothing</button>
+                    </div>
+                </div>
+            </div>
+            <div class="window" style="width: 400px;">
+                <div class="title-bar">
+                    <div class="title-bar-text">get me out of here</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <p>your robots are watching you</p>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button onclick="window.open('index.html', '_blank')">0_______________0</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Windows XP Style Taskbar -->
+    <div class="taskbar">
+        <div class="start-button">
+            <svg class="start-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3h8v8H3V3z" fill="#F35325"/>
+                <path d="M13 3h8v8h-8V3z" fill="#81BC06"/>
+                <path d="M3 13h8v8H3v-8z" fill="#05A6F0"/>
+                <path d="M13 13h8v8h-8v-8z" fill="#FFBA08"/>
+            </svg>
+            <span>start</span>
+        </div>
+        
+        <div class="task-buttons">
+            <button class="task-button active">My Application</button>
+            <button class="task-button">Quick Actions</button>
+        </div>
+        
+        <div class="system-tray">
+            <svg class="tray-icon" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <svg class="tray-icon" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <div class="clock" id="clock">12:00 PM</div>
+        </div>
+    </div>
+
+    <script>
+    // Tab switching functionality
+    document.querySelectorAll('[role="tab"]').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('aria-controls');
+            const tablist = tab.closest('menu');
+            const tabsSection = tab.closest('.tabs');
+            
+            tablist.querySelectorAll('[role="tab"]').forEach(t => {
+                t.setAttribute('aria-selected', 'false');
+            });
+            
+            tabsSection.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+                panel.hidden = true;
+            });
+            
+            tab.setAttribute('aria-selected', 'true');
+            document.getElementById(target).hidden = false;
+        });
+    });
+    
+    // Update clock
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const displayHours = hours % 12 || 12;
+        document.getElementById('clock').textContent = `${displayHours}:${minutes} ${ampm}`;
+    }
+    
+    updateClock();
+    setInterval(updateClock, 1000);
+    
+    // Start button click
+    document.querySelector('.start-button').addEventListener('click', function() {
+        alert('give me ur balls');
+    });
+</script>
+<!-- 
+ Load Clippy.js library 
+
+<script src="https://cdn.jsdelivr.net/npm/clippyjs@latest/build/clippy.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clippyjs@latest/build/clippy.css">
+
+ Initialize Clippy 
+<script>
+    // Wait for page to load
+    window.addEventListener('load', function() {
+        clippy.load('Clippy', function(agent) {
+            agent.show();
+            agent.moveTo(200, 200);
+            agent.speak('Hi! I see you\'re building a retro webpage. Need any help?');
+        });
+    }); 
+</script>
+-->
+<img src="200.gif" 
+     alt="Clippy" 
+     style="position: fixed; bottom: 100px; right: 50px; width: 120px; height: 120px; z-index: 10000;">
+</body>
+</html>

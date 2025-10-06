@@ -1,0 +1,266 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Retro Spotify Player</title>
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <style>
+    body {
+      background-color: #008080;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="window" style="width: 340px; margin: 40px;">
+    <div class="title-bar">
+      <div class="title-bar-text">Spotify Player</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p>C:\Media\Spotify\NowPlaying</p>
+      <iframe style="border:none;" src="https://open.spotify.com/embed/track/2b236i113oc1WCWqKF8dku?si=9934096859ec4fc5" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+  </div>
+
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Music I like</title>
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <style>
+    body {
+      background-color: #008080;
+      padding: 20px;
+      margin: 0;
+      padding-bottom: 60px; /* Space for taskbar */
+    }
+    
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .discogs-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px inset #c0c0c0;
+      background: #f0f0f0;
+    }
+    
+    .discogs-item img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border: 1px solid #808080;
+    }
+    
+    .discogs-info {
+      flex: 1;
+      font-size: 11px;
+    }
+    
+    .discogs-artist {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+    
+    .discogs-title {
+      color: #0000ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    
+    .discogs-year {
+      color: #666;
+      font-size: 10px;
+    }
+
+    /* Windows 95/98 Taskbar */
+    .taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: #c0c0c0;
+      border-top: 2px solid #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 2px;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
+
+    .start-button {
+      background: #c0c0c0;
+      border: 2px outset #ffffff;
+      padding: 4px 8px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-right: 5px;
+    }
+
+    .start-button:active {
+      border-style: inset;
+    }
+
+    .start-button img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .taskbar-divider {
+      width: 2px;
+      height: 30px;
+      background: #808080;
+      margin: 0 5px;
+      border-right: 1px solid #ffffff;
+    }
+
+    .taskbar-item {
+      background: #c0c0c0;
+      border: 2px outset #ffffff;
+      padding: 4px 12px;
+      margin-right: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .taskbar-item:active {
+      border-style: inset;
+    }
+
+    .system-tray {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px;
+      border: 1px inset #c0c0c0;
+      background: #c0c0c0;
+      font-size: 12px;
+    }
+
+    .clock {
+      font-family: 'MS Sans Serif', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Spotify Player Window (Left) -->
+    <div class="window" style="width: 340px;">
+      <div class="title-bar">
+        <div class="title-bar-text">Spotify</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p>C:\Media\Spotify\NowPlaying</p>
+        <div style="margin-bottom: 5px;">
+          <iframe style="border:none;" src="https://open.spotify.com/embed/track/2b236i113oc1WCWqKF8dku?si=9934096859ec4fc5" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <iframe style="border:none;" src="https://open.spotify.com/embed/track/6Gpsb1hWcfCvumriHe1bUN?si=8d58a01024cc45e1" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <iframe style="border:none;" src="https://open.spotify.com/embed/track/0CO8FICjkvVDekOcarbvIR?utm_source=generator" width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <iframe data-testid="embed-iframe" style="border:none;" src="https://open.spotify.com/embed/album/7FyQYAOkY0v3eIoSqpwFh0?utm_source=generator" width="300" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discogs Collection Window (Right) -->
+    <div class="window" style="width:300px; position: absolute; right: 20px; top: 40px;">
+      <div class="title-bar">
+        <div class="title-bar-text">Discogs</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p>C:\Media\Vinyl\Collection</p>
+        
+        <div style="text-align: center; padding: 20px;">
+          <a href="https://www.discogs.com/user/dhammi1/collection" 
+             target="_blank" 
+             style="color: #0000ff; text-decoration: underline;">
+            View My Full Collection on Discogs
+          </a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Windows 95/98 Taskbar -->
+  <div class="taskbar">
+    <button class="start-button" onclick="alert('fucking windows 98!')">
+      <span style="font-size: 18px;">
+        <img src="starticon.png" alt="Windows">
+      </span>
+      <span>Start</span>
+    </button>
+    
+    <div class="taskbar-divider"></div>
+      <div class="taskbar-item" onclick="window.open('https://open.spotify.com/user/12155334280?si=1c0b1358d76841fe', '_blank')"
+         style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+        <img src="musicicon.png" alt="Spotify" style="width: 16px; height: 16px;">
+      <span>Spotify</span>
+    </div>
+    <div class="taskbar-item">Discogs</div>
+    
+    <div class="system-tray">
+      <span>🔊</span>
+      <span class="clock" id="clock">12:00 PM</span>
+    </div>
+  </div>
+
+  <script>
+    // Update clock
+    function updateClock() {
+      const now = new Date();
+      const hours = now.getHours() % 12 || 12;
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+      document.getElementById('clock').textContent = `${hours}:${minutes} ${ampm}`;
+    }
+    
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
+  <br><br>
+  <a href="index.html" style="color: yellow;">Back to Home</a>
+</body>
+</html>

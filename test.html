@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Retro Spotify Player</title>
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <style>
+    body {
+      background-color: #008080;
+    }
+  </style>
+</head>
+<body>
+<div class="sunken-panel" style="height: 120px; width: 240px;">
+    <table class="interactive">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Version</th>
+          <th>Company</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="window.location='about_me.html'" style="cursor: pointer;">
+            <td>penor</td>
+            <td>3.51.11.00</td>
+            <td>MySQL AB</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+        <tr>
+          <td>SQL Server</td>
+          <td>3.70.06.23</td>
+          <td>Microsoft Corporation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    document.querySelectorAll('table.interactive').forEach(element => {
+      element.addEventListener('click', (event) => {
+        const highlightedClass = 'highlighted';
+        const isRow = element => element.tagName === 'TR' && element.parentElement.tagName === 'TBODY';
+        const newlySelectedRow = event.composedPath().find(isRow);
+        const previouslySelectedRow = Array.from(newlySelectedRow.parentElement.children).filter(isRow).find(element => element.classList.contains(highlightedClass));
+        if(previouslySelectedRow){
+          previouslySelectedRow.classList.toggle(highlightedClass);
+        }
+  
+        if (newlySelectedRow) {
+          newlySelectedRow.classList.toggle(highlightedClass);
+        }
+      })
+    });
+  </script>
+</body>
+</html>
