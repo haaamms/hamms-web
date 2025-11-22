@@ -38,20 +38,69 @@
   <meta charset="UTF-8">
   <title>Music I like</title>
   <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <link rel="stylesheet" href="https://unpkg.com/fixedsys-excelsior">
   <style>
     body {
       background-color: #008080;
       padding: 20px;
       margin: 0;
       padding-bottom: 60px; /* Space for taskbar */
+      font-family: "MS Sans Serif", sans-serif;
     }
-    
+
+    /* 3-column desktop layout */
     .container {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
+      height: calc(100vh - 120px); /* leave room for top padding + taskbar */
     }
-    
+
+    .left-column {
+      width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .main-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right-column {
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .small-window {
+      /* just a helper so the small ones feel like little pop-ups */
+      max-height: 220px;
+      overflow: hidden;
+    }
+
+    .main-window {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-window .window-body {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .feed-window {
+      flex: 1;
+    }
+
+    .feed-window .window-body {
+      height: 100%;
+      overflow-y: auto; /* skinny scrolling feed */
+    }
+
+    /* Discogs item styling (kept from your original, in case you use later) */
     .discogs-item {
       display: flex;
       align-items: center;
@@ -60,30 +109,30 @@
       border: 1px inset #c0c0c0;
       background: #f0f0f0;
     }
-    
+
     .discogs-item img {
       width: 40px;
       height: 40px;
       margin-right: 10px;
       border: 1px solid #808080;
     }
-    
+
     .discogs-info {
       flex: 1;
       font-size: 11px;
     }
-    
+
     .discogs-artist {
       font-weight: bold;
       margin-bottom: 2px;
     }
-    
+
     .discogs-title {
       color: #0000ff;
       text-decoration: underline;
       cursor: pointer;
     }
-    
+
     .discogs-year {
       color: #666;
       font-size: 10px;
@@ -146,6 +195,9 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .taskbar-item:active {
@@ -166,61 +218,231 @@
     .clock {
       font-family: 'MS Sans Serif', sans-serif;
     }
+
+    /* Stack columns on tiny screens */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+      .left-column,
+      .right-column {
+        width: 100%;
+      }
+    }
+
+    /* Notepad type shit */
+    .notepad-window {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .notepad-menu {
+        background: #c0c0c0;
+        padding: 2px 6px;
+        border-bottom: 1px solid #808080;
+        font-size: 12px;
+    }
+
+    .notepad-menu span {
+        margin-right: 14px;
+        cursor: default;
+    }
+
+    .notepad-body {
+        flex: 1;
+        margin: 4px;
+        padding: 6px;
+        border: 2px inset #c0c0c0;
+        background: #ffffff;
+        font-family: "Fixedsys Excelsior", "Lucida Console", monospace;
+        font-size: 12px;  /* Fixedsys looks best a little bigger */
+        line-height: 1.2;
+        white-space: pre-wrap;
+        overflow-y: auto;
+    }
+
+    .notepad-status {
+        background: #c0c0c0;
+        border-top: 1px solid #808080;
+        padding: 2px 6px;
+        font-size: 11px;
+        display: flex;
+        justify-content: space-between;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Spotify Player Window (Left) -->
-    <div class="window" style="width: 340px;">
-      <div class="title-bar">
-        <div class="title-bar-text">Spotify</div>
-        <div class="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
+    <!-- LEFT: small stacked windows (Spotify etc.) -->
+    <div class="left-column">
+
+      <!-- Spotify Window 1 -->
+      <div class="window small-window">
+        <div class="title-bar">
+          <div class="title-bar-text">Spotify - Now Playing</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
         </div>
-      </div>
-      <div class="window-body">
-        <p>C:\Media\Spotify\NowPlaying</p>
-        <div style="margin-bottom: 5px;">
+        <div class="window-body">
+          <p>C:\Media\Spotify\NowPlaying</p>
           <iframe style="border:none;" src="https://open.spotify.com/embed/track/2b236i113oc1WCWqKF8dku?si=9934096859ec4fc5" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
-        <div style="margin-bottom: 5px;">
-          <iframe style="border:none;" src="https://open.spotify.com/embed/track/6Gpsb1hWcfCvumriHe1bUN?si=8d58a01024cc45e1" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+
+      <!-- Spotify Window 2 -->
+      <div class="window small-window">
+        <div class="title-bar">
+          <div class="title-bar-text">Spotify - Queue</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
         </div>
-        <div style="margin-bottom: 5px;">
-          <iframe style="border:none;" src="https://open.spotify.com/embed/track/0CO8FICjkvVDekOcarbvIR?utm_source=generator" width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div style="margin-bottom: 5px;">
-          <iframe data-testid="embed-iframe" style="border:none;" src="https://open.spotify.com/embed/album/7FyQYAOkY0v3eIoSqpwFh0?utm_source=generator" width="300" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="window-body">
+          <p>C:\Media\Spotify\Queue</p>
+          <div style="margin-bottom: 5px;">
+            <iframe style="border:none;" src="https://open.spotify.com/embed/track/6Gpsb1hWcfCvumriHe1bUN?si=8d58a01024cc45e1" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          </div>
+          <div style="margin-bottom: 5px;">
+            <iframe style="border:none;" src="https://open.spotify.com/embed/track/0CO8FICjkvVDekOcarbvIR?utm_source=generator" width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </div>
         </div>
       </div>
+
+      <!-- Spotify Window 3 (Album) -->
+      <div class="window small-window">
+        <div class="title-bar">
+          <div class="title-bar-text">Spotify - Album</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <p>C:\Media\music\artists\</p>
+          <iframe data-testid="embed-iframe" style="border:none;" src="https://open.spotify.com/embed/artist/0z6zRFzl5njXWLVAisXQBz?utm_source=generator&theme=0" width="100%" height="200" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Discogs Collection Window (Right) -->
-    <div class="window" style="width:300px; position: absolute; right: 20px; top: 40px;">
-      <div class="title-bar">
-        <div class="title-bar-text">Discogs</div>
-        <div class="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
+    <!-- CENTER: big main window -->
+    <!-- CENTER: Notepad-style main window -->
+    <div class="main-column">
+        <div class="window notepad-window">
+            <div class="title-bar">
+                <div class="title-bar-text">hello.txt</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+
+        <div class="notepad-menu">
+            <span>File</span>
+            <span>Edit</span>
+            <span>Search</span>
+            <span>Format</span>
+            <span>View</span>
+            <span>Help</span>
         </div>
-      </div>
-      <div class="window-body">
-        <p>C:\Media\Vinyl\Collection</p>
+
+    <div class="notepad-body">
+Whoever is here, appreciate you coming by and looking at my shitty website.
         
-        <div style="text-align: center; padding: 20px;">
-          <a href="https://www.discogs.com/user/dhammi1/collection" 
-             target="_blank" 
-             style="color: #0000ff; text-decoration: underline;">
-            View My Full Collection on Discogs
-          </a>
-        </div>
-        
-      </div>
+I built this with help from some shitty boilerplate code and some CSS styles I found online. One of my biggest hobbies is music and a newfound love of coding, so I built this website (badly) like the ones I always went to when I was a kid. I am attaching some of my music related socials if you want to connect or anything. Throw me a follow. I'll be making updates to this ::semi:: regularly.
+    
+If you're someone I know then hiiiiii, otherwise if you want to connect my github is on a separate page, give me a follow! Looking forward to whatever this turns into. We will see how things go.
     </div>
+
+    <div class="notepad-status">
+      <span>Ln 1, Col 1</span>
+      <span>INS</span>
+    </div>
+  </div>
+</div>
+
+
+    <!-- RIGHT: skinny scrolling feed (Discogs) -->
+<div class="right-column">
+  <div class="window feed-window">
+    <div class="title-bar">
+      <div class="title-bar-text">Discogs Feed</div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="window-body">
+      <p>C:\Media\Vinyl\Feed</p>
+
+      <div style="text-align: center; padding: 15px;">
+        <a href="https://www.discogs.com/user/dhammi1/collection"
+           target="_blank"
+           style="color: #0000ff; text-decoration: underline;">
+          View My Full Collection on Discogs
+        </a>
+      </div>
+
+      <hr style="margin: 10px 0; border-top: 2px groove #c0c0c0;">
+
+      <!-- FEED ITEMS BELOW -->
+
+      <div class="discogs-item">
+        <img src="/mnt/data/d1a788d1-d593-4611-8760-e9e6257876b0.png" alt="Album">
+        <div class="discogs-info">
+          <div class="discogs-artist">The Fall of Troy</div>
+          <div class="discogs-title">Doppelgänger</div>
+          <div class="discogs-year">2005 – Post-Hardcore, Mathcore</div>
+        </div>
+      </div>
+
+      <div class="discogs-item">
+        <img src="/mnt/data/d1a788d1-d593-4611-8760-e9e6257876b0.png" alt="Album">
+        <div class="discogs-info">
+          <div class="discogs-artist">Thou</div>
+          <div class="discogs-title">Heathen</div>
+          <div class="discogs-year">2014 – Sludge, Doom</div>
+        </div>
+      </div>
+
+      <div class="discogs-item">
+        <img src="/mnt/data/d1a788d1-d593-4611-8760-e9e6257876b0.png" alt="Album">
+        <div class="discogs-info">
+          <div class="discogs-artist">Malice at the Palace</div>
+          <div class="discogs-title">Self-Titled</div>
+          <div class="discogs-year">2015 – Hardcore</div>
+        </div>
+      </div>
+
+      <div class="discogs-item">
+        <img src="/mnt/data/d1a788d1-d593-4611-8760-e9e6257876b0.png" alt="Album">
+        <div class="discogs-info">
+          <div class="discogs-artist">Jesus Piece</div>
+          <div class="discogs-title">…So Unknown</div>
+          <div class="discogs-year">2023 – Metalcore</div>
+        </div>
+      </div>
+
+      <div class="discogs-item">
+        <img src="/mnt/data/d1a788d1-d593-4611-8760-e9e6257876b0.png" alt="Album">
+        <div class="discogs-info">
+          <div class="discogs-artist">Eyehategod</div>
+          <div class="discogs-title">Dopesick</div>
+          <div class="discogs-year">1996 – Sludge Metal</div>
+        </div>
+      </div>
   </div>
 
   <!-- Windows 95/98 Taskbar -->
@@ -231,15 +453,19 @@
       </span>
       <span>Start</span>
     </button>
-    
+
     <div class="taskbar-divider"></div>
-      <div class="taskbar-item" onclick="window.open('https://open.spotify.com/user/12155334280?si=1c0b1358d76841fe', '_blank')"
-         style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
-        <img src="musicicon.png" alt="Spotify" style="width: 16px; height: 16px;">
+
+    <div class="taskbar-item"
+         onclick="window.open('https://open.spotify.com/user/12155334280?si=1c0b1358d76841fe', '_blank')">
+      <img src="musicicon.png" alt="Spotify" style="width: 16px; height: 16px;">
       <span>Spotify</span>
     </div>
-    <div class="taskbar-item">Discogs</div>
-    
+
+    <div class="taskbar-item">
+      <span>Discogs</span>
+    </div>
+
     <div class="system-tray">
       <span>🔊</span>
       <span class="clock" id="clock">12:00 PM</span>
@@ -255,7 +481,7 @@
       const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
       document.getElementById('clock').textContent = `${hours}:${minutes} ${ampm}`;
     }
-    
+
     updateClock();
     setInterval(updateClock, 1000);
   </script>
