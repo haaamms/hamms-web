@@ -10,10 +10,10 @@
             margin: 0;
             padding: 0;
             background-image: url('xp.jpg');
-            background-size: cover;      /* Scales image to cover entire background */
-            background-position: center; /* Centers the image */
-            background-repeat: no-repeat; /* Prevents tiling */
-            background-attachment: fixed; /* Keeps background fixed when scrolling */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             font-family: "Tahoma", sans-serif;
             overflow: hidden;
             cursor: url('dscim.png'), auto;
@@ -21,19 +21,36 @@
         
         .desktop {
             height: calc(100vh - 30px);
-            overflow-y: auto;
+            position: relative;
             padding: 20px;
             cursor: url('dscim.png'), auto;
         }
         
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            cursor: url('dscim.png'), auto;
+        /* Small windows on the left */
+        .left-windows {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .small-window {
+            width: 400px;
+        }
+        
+        /* Main centered window */
+        .center-window {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            max-width: calc(100vw - 480px); /* Leave space for left windows */
         }
         
         .window {
-            margin-bottom: 20px;
             cursor: url('dscim.png'), auto;
         }
         
@@ -140,145 +157,14 @@
             font-size: 11px;
             padding: 0 5px;
         }
-        
-        /* Desktop Icons */
-        .desktop-icon {
-            width: 70px;
-            text-align: center;
-            margin-bottom: 20px;
-            cursor: url('dscim.png'), auto;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-        
-        .desktop-icon img {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 5px;
-        }
-        
-        .desktop-icon span {
-            display: block;
-            font-size: 11px;
-        }
     </style>
 </head>
 <body>
     <div class="desktop">
-        <div class="container">
-            <!-- Main Window -->
-            <div class="window" style="width: 100%">
-                <div class="title-bar">
-                    <div class="title-bar-text">professional documents</div>
-                    <div class="title-bar-controls">
-                        <button aria-label="Minimize"></button>
-                        <button aria-label="Maximize"></button>
-                        <button aria-label="Close"></button>
-                    </div>
-                </div>
-                <div class="window-body">
-                    <p>there are some things</p>
-                    
-                    <!-- Tabs -->
-                    <section class="tabs">
-                        <menu role="tablist">
-                            <button role="tab" aria-selected="true" aria-controls="tab-general">abcd</button>
-                            <button role="tab" aria-controls="tab-settings">efgh</button>
-                            <button role="tab" aria-controls="tab-about">ijkl</button>
-                        </menu>
-                        
-                        <article role="tabpanel" id="tab-general">
-                            <h3>General Tab</h3>
-                            
-                            <fieldset>
-                                <legend>Options</legend>
-                                <div class="field-row">
-                                    <input checked type="checkbox" id="option1">
-                                    <label for="option1">Enable feature one</label>
-                                </div>
-                                <div class="field-row">
-                                    <input type="checkbox" id="option2">
-                                    <label for="option2">Enable feature two</label>
-                                </div>
-                            </fieldset>
-                            
-                            <div class="field-row" style="margin-top: 10px;">
-                                <label for="text-input">Text Input:</label>
-                                <input id="text-input" type="text" placeholder="Enter text here" />
-                            </div>
-                            
-                            <div class="field-row">
-                                <label for="select-input">Choose option:</label>
-                                <select id="select-input">
-                                    <option>penis</option>
-                                    <option>penis</option>
-                                    <option>penis</option>
-                                </select>
-                            </div>
-                        </article>
-                        
-                        <article role="tabpanel" hidden id="tab-settings">
-                            <h3>just guess</h3>
-                            <fieldset>
-                                <legend>Preferences</legend>
-                                <div class="field-row">
-                                    <input id="radio1" type="radio" name="pref" checked>
-                                    <label for="radio1">Preference A</label>
-                                </div>
-                                <div class="field-row">
-                                    <input id="radio2" type="radio" name="pref">
-                                    <label for="radio2">Preference B</label>
-                                </div>
-                                <div class="field-row">
-                                    <input id="radio3" type="radio" name="pref">
-                                    <label for="radio3">Preference C</label>
-                                </div>
-                            </fieldset>
-                            
-                            <h4 style="margin-top: 15px;"></h4>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/rWSgsbWiX_g?si=yJU3N-__Uxbac9-1"
-                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            referrerpolicy="strict-origin-when-cross-origin"; allowfullscreen></iframe>
-                            <p style="margin-top: 10px;">Progress:</p>
-                            <progress max="100" value="65"></progress>
-                        </article>
-                        
-                        <article role="tabpanel" hidden id="tab-about">
-                            <h3>there is no escape</h3>
-                            <p>i have no mouth and i must scream</p>
-                            
-                            <ul class="tree-view">
-                                <li>teh pwnage</li>
-                                <li>
-                                    <details>
-                                        <summary>links from me to you</summary>
-                                        <ul>
-                                            <li onclick="window.open('https://botoxparty.github.io/XP.css/', '_blank')">web styles here</li>
-                                            <li onclick="window.open('https://github.com/haaamms', '_blank')">my github</li>
-                                            <li onclick="window.open('https://www.discogs.com/user/dhammi1/collection', '_blank')">my discogs</li>
-                                        </ul>
-                                    </details>
-                                </li>
-                                <li>Version 1.0</li>
-                            </ul>
-                        </article>
-                    </section>
-                    
-                    <section class="field-row" style="justify-content: flex-end; margin-top: 15px;">
-                        <button>OK</button>
-                        <button>Cancel</button>
-                        <button>Apply</button>
-                    </section>
-                </div>
-                
-                <div class="status-bar">
-                    <p class="status-bar-field">Ready</p>
-                    <p class="status-bar-field">Status: Active</p>
-                </div>
-            </div>
-            
-            <!-- Secondary Window -->
-            <div class="window" style="width: 400px;">
+        <!-- Small windows on the left -->
+        <div class="left-windows">
+            <!-- Quick Actions Window -->
+            <div class="window small-window">
                 <div class="title-bar">
                     <div class="title-bar-text">Quick Actions</div>
                     <div class="title-bar-controls">
@@ -294,7 +180,9 @@
                     </div>
                 </div>
             </div>
-            <div class="window" style="width: 400px;">
+            
+            <!-- Get Me Out Window -->
+            <div class="window small-window">
                 <div class="title-bar">
                     <div class="title-bar-text">get me out of here</div>
                     <div class="title-bar-controls">
@@ -307,6 +195,117 @@
                         <button onclick="window.open('index.html', '_blank')">0_______________0</button>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Main centered window -->
+        <div class="window center-window">
+            <div class="title-bar">
+                <div class="title-bar-text">professional documents</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <p>there are some things</p>
+                
+                <!-- Tabs -->
+                <section class="tabs">
+                    <menu role="tablist">
+                        <button role="tab" aria-selected="true" aria-controls="tab-general">abcd</button>
+                        <button role="tab" aria-controls="tab-settings">efgh</button>
+                        <button role="tab" aria-controls="tab-about">ijkl</button>
+                    </menu>
+                    
+                    <article role="tabpanel" id="tab-general">
+                        <h3>General Tab</h3>
+                        
+                        <fieldset>
+                            <legend>Options</legend>
+                            <div class="field-row">
+                                <input checked type="checkbox" id="option1">
+                                <label for="option1">Enable feature one</label>
+                            </div>
+                            <div class="field-row">
+                                <input type="checkbox" id="option2">
+                                <label for="option2">Enable feature two</label>
+                            </div>
+                        </fieldset>
+                        
+                        <div class="field-row" style="margin-top: 15px;">
+                            <label for="text-input">Text Input:</label>
+                            <input id="text-input" type="text" placeholder="Enter text here" />
+                        </div>
+                        
+                        <div class="field-row" style="margin-top: 10px;">
+                            <label for="select-input">Choose option:</label>
+                            <select id="select-input">
+                                <option>penis</option>
+                                <option>penis</option>
+                                <option>penis</option>
+                            </select>
+                        </div>
+                    </article>
+                    
+                    <article role="tabpanel" hidden id="tab-settings">
+                        <h3>just guess</h3>
+                        <fieldset>
+                            <legend>Preferences</legend>
+                            <div class="field-row">
+                                <input id="radio1" type="radio" name="pref" checked>
+                                <label for="radio1">Preference A</label>
+                            </div>
+                            <div class="field-row">
+                                <input id="radio2" type="radio" name="pref">
+                                <label for="radio2">Preference B</label>
+                            </div>
+                            <div class="field-row">
+                                <input id="radio3" type="radio" name="pref">
+                                <label for="radio3">Preference C</label>
+                            </div>
+                        </fieldset>
+                        
+                        <h4 style="margin-top: 15px;"></h4>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/rWSgsbWiX_g?si=yJU3N-__Uxbac9-1"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        referrerpolicy="strict-origin-when-cross-origin"; allowfullscreen></iframe>
+                        <p style="margin-top: 10px;">Progress:</p>
+                        <progress max="100" value="65"></progress>
+                    </article>
+                    
+                    <article role="tabpanel" hidden id="tab-about">
+                        <h3>there is no escape</h3>
+                        <p>i have no mouth and i must scream</p>
+                        
+                        <ul class="tree-view">
+                            <li>teh pwnage</li>
+                            <li>
+                                <details>
+                                    <summary>links from me to you</summary>
+                                    <ul>
+                                        <li onclick="window.open('https://botoxparty.github.io/XP.css/', '_blank')">web styles here</li>
+                                        <li onclick="window.open('https://github.com/haaamms', '_blank')">my github</li>
+                                        <li onclick="window.open('https://www.discogs.com/user/dhammi1/collection', '_blank')">my discogs</li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li>Version 1.0</li>
+                        </ul>
+                    </article>
+                </section>
+                
+                <section class="field-row" style="justify-content: flex-end; margin-top: 15px;">
+                    <button>OK</button>
+                    <button>Cancel</button>
+                    <button>Apply</button>
+                </section>
+            </div>
+            
+            <div class="status-bar">
+                <p class="status-bar-field">Ready</p>
+                <p class="status-bar-field">Status: Active</p>
             </div>
         </div>
     </div>
@@ -374,30 +373,8 @@
     
     updateClock();
     setInterval(updateClock, 1000);
-    
-    // Start button click
-   // document.querySelector('.start-button').addEventListener('click', function() {
-   //     alert('give me ur balls');
-   // });
-</script>
-<!-- 
- Load Clippy.js library 
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/clippyjs@latest/build/clippy.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clippyjs@latest/build/clippy.css">
-
- Initialize Clippy 
-<script>
-    // Wait for page to load
-    window.addEventListener('load', function() {
-        clippy.load('Clippy', function(agent) {
-            agent.show();
-            agent.moveTo(200, 200);
-            agent.speak('Hi! I see you\'re building a retro webpage. Need any help?');
-        });
-    }); 
-</script>
--->
 <img src="200.gif" 
      alt="Clippy" 
      style="position: fixed; bottom: 100px; right: 50px; width: 120px; height: 120px; z-index: 10000;">
